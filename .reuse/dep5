@@ -1,0 +1,12 @@
+Format: https://www.debian.org/doc/packaging-manuals/copyright-format/1.0/
+Upstream-Name: array-changeset
+Upstream-Contact: Erik Michelson <opensource@erik.michelson.eu>
+Source: https://github.com/ErikMichelson/array-changeset
+
+Files: package.json package-lock.json .nvmrc .gitignore tsconfig.json biome.json
+Copyright: 2024 The HedgeDoc developers (see AUTHORS file)
+License: CC0-1.0
+
+Files: DCO.txt
+Copyright: 2004, 2006 The Linux Foundation and its contributors.
+License: LicenseRef-DCO

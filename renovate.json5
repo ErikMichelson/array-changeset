@@ -1,0 +1,14 @@
+/*
+ * SPDX-FileCopyrightText: 2024 Erik Michelson <opensource@erik.michelson.eu>
+ *
+ * SPDX-License-Identifier: MIT
+ */
+{
+  "extends": [
+    "config:js-lib",
+    ":assignee(ErikMichelson)"
+  ],
+  labels: [
+    "type: maintenance"
+  ]
+}
