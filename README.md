@@ -18,6 +18,16 @@ The library is **ESM-only**. See [this note by sindresorhus][esm-note] to learn 
 npm install array-changeset
 ```
 
+### In browser
+
+```html
+<script type="module">
+import { Changeset } from "https://cdn.jsdelivr.net/npm/array-changeset@1/+esm";
+
+// your code using Changeset
+</script>
+```
+
 ## Usage
 
 ```javascript
