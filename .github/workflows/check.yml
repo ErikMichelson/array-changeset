@@ -5,8 +5,6 @@
 name: Run checks
 on:
   push:
-    branches:
-      - main
 
 jobs:
   reuse:
