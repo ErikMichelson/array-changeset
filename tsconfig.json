@@ -2,9 +2,7 @@
   "compilerOptions": {
     "removeComments": true,
     "preserveConstEnums": true,
-    "lib": [
-      "ESNext"
-    ],
+    "lib": ["ESNext"],
     "declaration": true,
     "strict": true,
     "allowSyntheticDefaultImports": true,

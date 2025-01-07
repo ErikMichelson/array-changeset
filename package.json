@@ -10,7 +10,7 @@
     "coverage": "node --import tsx --test --experimental-test-coverage --test-reporter=lcov --test-reporter-destination=report.lcov tests/*.test.ts",
     "build": "rm -rf dist && tsc",
     "check": "biome check src/ *.json",
-    "fix": "biome check --apply src/ *.json",
+    "fix": "biome check --write src/ *.json",
     "prepublishOnly": "npm test && npm run check && npm run build"
   },
   "sideEffects": false,
@@ -18,30 +18,20 @@
     "fast-deep-equal": "^3.1.3"
   },
   "devDependencies": {
-    "@biomejs/biome": "1.5.3",
-    "@types/node": "20.11.24",
-    "tsx": "4.7.1",
-    "typescript": "5.3.3"
+    "@biomejs/biome": "1.9.4",
+    "@types/node": "22.10.5",
+    "tsx": "4.19.2",
+    "typescript": "5.7.2"
   },
   "author": {
     "name": "Erik Michelson",
     "email": "opensource@erik.michelson.eu",
     "url": "https://erik.michelson.eu"
   },
-  "keywords": [
-    "array",
-    "changeset",
-    "changes",
-    "diff"
-  ],
+  "keywords": ["array", "changeset", "changes", "diff"],
   "license": "MIT",
   "types": "dist/index.d.ts",
-  "files": [
-    "package.json",
-    "LICENSES",
-    "LICENSE",
-    "dist"
-  ],
+  "files": ["package.json", "LICENSES", "LICENSE", "dist"],
   "engines": {
     "node": ">=18"
   }
