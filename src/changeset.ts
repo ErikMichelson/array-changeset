@@ -3,8 +3,8 @@
  *
  * SPDX-License-Identifier: MIT
  */
-import equal from 'fast-deep-equal'
-import { exclusiveAddItem } from './utils.js'
+import equal from 'fast-deep-equal';
+import { exclusiveAddItem } from './utils.js';
 
 /**
  * A Changeset is a list of added and removed items from or to a list of items.
@@ -12,8 +12,8 @@ import { exclusiveAddItem } from './utils.js'
  * The changeset does not store or modify the original list.
  */
 export class Changeset<T> {
-  private added: T[] = []
-  private removed: T[] = []
+  private added: T[] = [];
+  private removed: T[] = [];
 
   /**
    * Creates a new Changeset.
@@ -22,15 +22,15 @@ export class Changeset<T> {
    * @param removed Optional initializer of removed items
    */
   constructor(added: T[] = [], removed: T[] = []) {
-    this.added = added
-    this.removed = removed
+    this.added = added;
+    this.removed = removed;
   }
 
   /**
    * Returns true if the changeset contains any changes
    */
   hasChanges(): boolean {
-    return this.added.length > 0 || this.removed.length > 0
+    return this.added.length > 0 || this.removed.length > 0;
   }
 
   /**
@@ -40,7 +40,7 @@ export class Changeset<T> {
    * @param equalFn Optional function to compare items
    */
   add(item: T, equalFn = equal): void {
-    exclusiveAddItem(item, this.added, this.removed, equalFn)
+    exclusiveAddItem(item, this.added, this.removed, equalFn);
   }
 
   /**
@@ -50,7 +50,7 @@ export class Changeset<T> {
    * @param equalFn Optional function to compare items
    */
   remove(item: T, equalFn = equal): void {
-    exclusiveAddItem(item, this.removed, this.added, equalFn)
+    exclusiveAddItem(item, this.removed, this.added, equalFn);
   }
 
   /**
@@ -60,29 +60,29 @@ export class Changeset<T> {
    * @param equalFn Optional function to compare items
    */
   uniquelyAddItem(item: T, equalFn = equal): void {
-    exclusiveAddItem(item, this.added, this.removed, equalFn, true)
+    exclusiveAddItem(item, this.added, this.removed, equalFn, true);
   }
 
   /**
    * Clears the changeset.
    */
   clear(): void {
-    this.added = []
-    this.removed = []
+    this.added = [];
+    this.removed = [];
   }
 
   /**
    * Returns the added items.
    */
   getAdded(): T[] {
-    return this.added
+    return this.added;
   }
 
   /**
    * Returns the removed items.
    */
   getRemoved(): T[] {
-    return this.removed
+    return this.removed;
   }
 
   /**
@@ -95,19 +95,19 @@ export class Changeset<T> {
    */
   applyOnto(original: T[], equalFn = equal): T[] {
     if (!this.hasChanges()) {
-      return original
+      return original;
     }
     if (original.length === 0) {
-      return this.added
+      return this.added;
     }
     if (this.removed.length === 0) {
-      return [...original, ...this.added]
+      return [...original, ...this.added];
     }
     const withoutRemovedEntries = original.filter(
       (originalItem) =>
         !this.removed.some((removedItem) => equalFn(removedItem, originalItem))
-    )
-    return [...withoutRemovedEntries, ...this.added]
+    );
+    return [...withoutRemovedEntries, ...this.added];
   }
 
   /**
@@ -124,16 +124,16 @@ export class Changeset<T> {
     equalFn = equal
   ): Changeset<T> {
     if (equalFn(original, modified)) {
-      return new Changeset()
+      return new Changeset();
     }
     const added = modified.filter(
       (modifiedItem) =>
         !original.some((originalItem) => equalFn(modifiedItem, originalItem))
-    )
+    );
     const removed = original.filter(
       (originalItem) =>
         !modified.some((modifiedItem) => equalFn(modifiedItem, originalItem))
-    )
-    return new Changeset<T>(added, removed)
+    );
+    return new Changeset<T>(added, removed);
   }
 }

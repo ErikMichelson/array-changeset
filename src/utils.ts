@@ -12,18 +12,18 @@ export const exclusiveAddItem = <T>(
 ): void => {
   const indexInArrayToAvoid = arrayToAvoid.findIndex((arrayItem) =>
     equalFn(item, arrayItem)
-  )
+  );
   if (indexInArrayToAvoid >= 0) {
-    arrayToAvoid.splice(indexInArrayToAvoid, 1)
-    return
+    arrayToAvoid.splice(indexInArrayToAvoid, 1);
+    return;
   }
   if (unique) {
     const indexInArrayToAdd = arrayToAdd.findIndex((arrayItem) =>
       equalFn(item, arrayItem)
-    )
+    );
     if (indexInArrayToAdd >= 0) {
-      return
+      return;
     }
   }
-  arrayToAdd.push(item)
-}
+  arrayToAdd.push(item);
+};

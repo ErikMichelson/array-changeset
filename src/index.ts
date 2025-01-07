@@ -3,5 +3,5 @@
  *
  * SPDX-License-Identifier: MIT
  */
-export { Changeset } from './changeset.js'
-export { exclusiveAddItem } from './utils.js'
+export { Changeset } from './changeset.js';
+export { exclusiveAddItem } from './utils.js';
