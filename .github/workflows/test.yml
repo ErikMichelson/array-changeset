@@ -11,7 +11,8 @@ jobs:
     name: Test on Node ${{ matrix.node-version }}
     strategy:
       matrix:
-        node-version: [ '18.x', '20.x', '22.x' ]
+        # do not test on Node 18 as the node:test module supports lcov only from 20.11.0 onwards
+        node-version: [ '20.x', '22.x' ]
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
