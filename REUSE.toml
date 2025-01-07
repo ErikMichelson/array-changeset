@@ -1,0 +1,16 @@
+version = 1
+SPDX-PackageName = "array-changeset"
+SPDX-PackageSupplier = "Erik Michelson <opensource@erik.michelson.eu>"
+SPDX-PackageDownloadLocation = "https://github.com/ErikMichelson/array-changeset"
+
+[[annotations]]
+path = ["package.json", "package-lock.json", ".nvmrc", ".gitignore", "tsconfig.json", "biome.json"]
+precedence = "aggregate"
+SPDX-FileCopyrightText = "2025 Erik Michelson"
+SPDX-License-Identifier = "CC0-1.0"
+
+[[annotations]]
+path = "DCO.txt"
+precedence = "aggregate"
+SPDX-FileCopyrightText = "2004, 2006 The Linux Foundation and its contributors."
+SPDX-License-Identifier = "LicenseRef-DCO"

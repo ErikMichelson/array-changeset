@@ -1,5 +1,5 @@
 <!--
-SPDX-FileCopyrightText: 2024 Erik Michelson <opensource@erik.michelson.eu>
+SPDX-FileCopyrightText: 2025 Erik Michelson <opensource@erik.michelson.eu>
 
 SPDX-License-Identifier: MIT
 -->
