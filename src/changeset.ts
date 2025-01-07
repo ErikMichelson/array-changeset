@@ -15,6 +15,10 @@ export class Changeset<T> {
   private added: T[] = [];
   private removed: T[] = [];
 
+  private callbacksAdd: ((item: T) => void)[] = [];
+  private callbacksRemove: ((item: T) => void)[] = [];
+  private callbacksClear: (() => void)[] = [];
+
   /**
    * Creates a new Changeset.
    *
@@ -28,6 +32,8 @@ export class Changeset<T> {
 
   /**
    * Returns true if the changeset contains any changes
+   *
+   * @return Boolean indicating whether changes are contained
    */
   hasChanges(): boolean {
     return this.added.length > 0 || this.removed.length > 0;
@@ -41,6 +47,9 @@ export class Changeset<T> {
    */
   add(item: T, equalFn = equal): void {
     exclusiveAddItem(item, this.added, this.removed, equalFn);
+    for (const callback of this.callbacksAdd) {
+      callback(item);
+    }
   }
 
   /**
@@ -51,6 +60,9 @@ export class Changeset<T> {
    */
   remove(item: T, equalFn = equal): void {
     exclusiveAddItem(item, this.removed, this.added, equalFn);
+    for (const callback of this.callbacksRemove) {
+      callback(item);
+    }
   }
 
   /**
@@ -61,6 +73,9 @@ export class Changeset<T> {
    */
   uniquelyAddItem(item: T, equalFn = equal): void {
     exclusiveAddItem(item, this.added, this.removed, equalFn, true);
+    for (const callback of this.callbacksAdd) {
+      callback(item);
+    }
   }
 
   /**
@@ -69,6 +84,9 @@ export class Changeset<T> {
   clear(): void {
     this.added = [];
     this.removed = [];
+    for (const callback of this.callbacksClear) {
+      callback();
+    }
   }
 
   /**
@@ -108,6 +126,67 @@ export class Changeset<T> {
         !this.removed.some((removedItem) => equalFn(removedItem, originalItem))
     );
     return [...withoutRemovedEntries, ...this.added];
+  }
+
+  /**
+   * Adds an event listener for changes to the changeset.
+   *
+   * @param event The event to listen for
+   * @param callback The callback to call when the event occurs
+   */
+  addEventListener(event: 'add' | 'remove', callback: (item: T) => void): void;
+  addEventListener(event: 'clear', callback: () => void): void;
+  addEventListener(
+    event: 'add' | 'remove' | 'clear',
+    callback: ((item: T) => void) | (() => void)
+  ): void {
+    switch (event) {
+      case 'add':
+        this.callbacksAdd.push(callback);
+        break;
+      case 'remove':
+        this.callbacksRemove.push(callback);
+        break;
+      case 'clear':
+        this.callbacksClear.push(callback as () => void);
+        break;
+      default:
+        throw new Error('Unknown callback event');
+    }
+  }
+
+  /**
+   * Removes an event listener for changes from the changeset.
+   *
+   * @param event The event to remove the listener for
+   * @param callback The callback to remove. Needs to be the same function reference as the one added.
+   */
+  removeEventListener(
+    event: 'add' | 'remove',
+    callback: (item: T) => void
+  ): void;
+  removeEventListener(event: 'clear', callback: () => void): void;
+  removeEventListener(
+    event: 'add' | 'remove' | 'clear',
+    callback: ((item: T) => void) | (() => void)
+  ): void {
+    switch (event) {
+      case 'add':
+        this.callbacksAdd = this.callbacksAdd.filter((cb) => cb !== callback);
+        break;
+      case 'remove':
+        this.callbacksRemove = this.callbacksRemove.filter(
+          (cb) => cb !== callback
+        );
+        break;
+      case 'clear':
+        this.callbacksClear = this.callbacksClear.filter(
+          (cb) => cb !== callback
+        );
+        break;
+      default:
+        throw new Error('Unknown callback event');
+    }
   }
 
   /**

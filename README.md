@@ -46,15 +46,22 @@ console.log(changeset.hasChanges()) // true
 console.log(changeset.getAdded()) // ['bar']
 console.log(changeset.getRemoved()) // ['!']
 
+// Add an event listener for logging additions
+const logAddition = (item) => console.log(`Added: ${item}`)
+changeset.addEventListener('add', logAddition) // Other events are: remove, clear
+
 // Modify the changeset (arrayA and arrayB are not modified)
-changeset.add('!')
+changeset.add('!') // this triggers the event listener
 changeset.remove('bar')
 changeset.remove('more')
+changeset.uniquelyAddItem('unique') // This triggers the event listener as well
 changeset.uniquelyAddItem('unique', (a, b) => a === b) // The comparator is optional and defaults to fast-deep-equal
-changeset.uniquelyAddItem('unique', (a, b) => a === b)
 
 console.log(changeset.getAdded()) // ['unique']
 console.log(changeset.getRemoved()) // ['more']
+
+// Remove the event listener again
+changeset.removeEventListener('add', logAddition)
 
 // Apply the changeset to another array (without modifying arrayC)
 const arrayC = ['much', 'more', 'foo', '!']
