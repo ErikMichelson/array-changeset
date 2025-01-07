@@ -13,6 +13,10 @@
     "fix": "biome check --write src/ *.json",
     "prepublishOnly": "npm test && npm run check && npm run build"
   },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/ErikMichelson/array-changeset.git"
+  },
   "sideEffects": false,
   "dependencies": {
     "fast-deep-equal": "^3.1.3"
