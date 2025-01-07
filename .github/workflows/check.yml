@@ -10,7 +10,7 @@ jobs:
   reuse:
     runs-on: ubuntu-latest
     container:
-      image: fsfe/reuse:3.0.2
+      image: fsfe/reuse:5.0.2
     steps:
       - name: Checkout
         uses: actions/checkout@v4
