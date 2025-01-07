@@ -6,6 +6,11 @@ SPDX-License-Identifier: MIT
 
 # array-changeset
 
+[![NPM Version](https://img.shields.io/npm/v/array-changeset)](https://www.npmjs.com/package/array-changeset)
+[![Coverage Status](https://coveralls.io/repos/github/ErikMichelson/array-changeset/badge.svg?branch=main)](https://coveralls.io/github/ErikMichelson/array-changeset?branch=main)
+[![Checks](https://github.com/ErikMichelson/array-changeset/actions/workflows/check.yml/badge.svg)](https://github.com/ErikMichelson/array-changeset/actions/workflows/check.yml)
+[![Tests](https://github.com/ErikMichelson/array-changeset/actions/workflows/test.yml/badge.svg)](https://github.com/ErikMichelson/array-changeset/actions/workflows/test.yml)
+
 This tiny library can be used to calculate the changeset between two arrays and applying these changes to another array.
 
 The library is **ESM-only**. See [this note by sindresorhus][esm-note] to learn more about that.
